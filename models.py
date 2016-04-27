@@ -1,24 +1,29 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, DateTime, Integer, String, ForeignKey, func
 from sqlalchemy.orm import relationship, backref
 from database import Base
 
-class User(Base):
-    __tablename__ = 'users'
+
+class PongMixin(object):
     id = Column(Integer, primary_key=True)
-    slack_name = Column(String(255), unique=True)
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(
+        DateTime, server_default=func.now(), onupdate=func.now())
+
+class User(PongMixin, Base):
+    __tablename__ = 'users'
+    name = Column(String(255), unique=True, nullable=False)
 
     def matches(self):
         return self.matches1 + self.matches2
 
 
-class Match(Base):
+class Match(PongMixin, Base):
     __tablename__ = 'matches'
-    id = Column(Integer, primary_key=True)
-    user_1_id = Column(Integer, ForeignKey('users.id'))
-    user_2_id = Column(Integer, ForeignKey('users.id'))
-    winner_id = Column(Integer, ForeignKey('users.id'))
-    user_1_score = Column(Integer)
-    user_2_score = Column(Integer)
+    user_1_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    user_2_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    winner_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    user_1_score = Column(Integer, nullable=False)
+    user_2_score = Column(Integer, nullable=False)
 
     user_1 = relationship(
         'User', foreign_keys=[user_1_id], backref=backref('matches1'))
