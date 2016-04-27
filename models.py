@@ -7,6 +7,9 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     slack_name = Column(String(255), unique=True)
 
+    def matches(self):
+        return self.matches1 + self.matches2
+
 
 class Match(Base):
     __tablename__ = 'matches'
@@ -15,5 +18,6 @@ class Match(Base):
     user_2_id = Column(Integer, ForeignKey('users.id'))
 
     user_1 = relationship(
-        'User', foreign_keys=[user_1_id], backref=backref('matches'))
-    user_2 = relationship('User', foreign_keys=[user_2_id])
+        'User', foreign_keys=[user_1_id], backref=backref('matches1'))
+    user_2 = relationship(
+        'User', foreign_keys=[user_2_id], backref=backref('matches2'))
