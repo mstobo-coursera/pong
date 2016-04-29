@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Ping Pong Leaderboard</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Rating</th>
+            <th>Wins</th>
+            <th>Losses</th>
+            <th>Games Played</th>
+            <th>Win %</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.rank }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.rating }}</td>
+            <td>{{ user.wins }}</td>
+            <td>{{ user.losses }}</td>
+            <td>{{ user.wins + user.losses }}</td>
+            <td>{{ (user.wins|float / (user.wins + user.losses) * 100)|round|int }}%</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

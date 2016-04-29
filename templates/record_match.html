@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="btn-group col-sm-4 col-sm-offset-4" role="group">
+        <span class="input-group-btn">
+            <button id="singles-btn" type="button" class="btn btn-success">Singles</button>
+            <button id="doubles-btn" type="button" class="btn btn-success">Doubles</button>
+        </span>
+    </div>
+
+    <div class="col-sm-6">
+        <h2>Player 1</h2>
+        <select id="player-1-selector" class="form-control">
+            {% for user in users %}
+            <option data-player-id="{{ user.id }}">{{ user.name }}</option>
+            {% endfor %}
+        </select>
+
+        <div id="numericInput1" class="numericInput">
+            <div id="numBox1" class="numBox"></div>
+            <table id="keypad1" class="keypad">
+                <tr>
+                    <td class="key1 btn btn-primary">1</td>
+                    <td class="key1 btn btn-primary">2</td>
+                    <td class="key1 btn btn-primary">3</td>
+                </tr>
+                <tr>
+                    <td class="key1 btn btn-primary">4</td>
+                    <td class="key1 btn btn-primary">5</td>
+                    <td class="key1 btn btn-primary">6</td>
+                </tr>
+                <tr>
+                    <td class="key1 btn btn-primary">7</td>
+                    <td class="key1 btn btn-primary">8</td>
+                    <td class="key1 btn btn-primary">9</td>
+                </tr>
+                <tr>
+                    <td class="key1 btn btn-info special">DEL</td>
+                    <td class="key1 btn btn-primary">0</td>
+                    <td class="key1 btn btn-info special">CLR</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <h2>Player 2</h2>
+        <select id="player-2-selector" class="form-control">
+            {% for user in users %}
+            <option data-player-id="{{ user.id }}">{{ user.name }}</option>
+            {% endfor %}
+        </select>
+
+        <div id="numericInput2" class="numericInput">
+            <div id="numBox2" class="numBox"></div>
+            <table id="keypad2" class="keypad">
+                <tr>
+                    <td class="key2 btn btn-primary">1</td>
+                    <td class="key2 btn btn-primary">2</td>
+                    <td class="key2 btn btn-primary">3</td>
+                </tr>
+                <tr>
+                    <td class="key2 btn btn-primary">4</td>
+                    <td class="key2 btn btn-primary">5</td>
+                    <td class="key2 btn btn-primary">6</td>
+                </tr>
+                <tr>
+                    <td class="key2 btn btn-primary">7</td>
+                    <td class="key2 btn btn-primary">8</td>
+                    <td class="key2 btn btn-primary">9</td>
+                </tr>
+                <tr>
+                    <td class="key2 btn btn-info special">DEL</td>
+                    <td class="key2 btn btn-primary">0</td>
+                    <td class="key2 btn btn-info special">CLR</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <button id="submit-btn" type="button" class="btn btn-success col-sm-2 col-sm-offset-5">Submit Match</button>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script type="text/javascript" src="{{ url_for('static', filename='record_match.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='record_match.css') }}">
+{% endblock %}
