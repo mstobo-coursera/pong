@@ -1,12 +1,12 @@
 $(document).ready(function(){
     $('.key1').click(function() {
         var numBox = document.getElementById('numBox1');
-	onKeyPress(numBox, this);
+        onKeyPress(numBox, this);
     });
 
     $('.key2').click(function() {
         var numBox = document.getElementById('numBox2');
-	onKeyPress(numBox, this);
+        onKeyPress(numBox, this);
     });
 });
 
@@ -31,17 +31,28 @@ function onKeyPress(numBox, key) {
 
 $(document).ready(function() {
     $('#submit-btn').click(function() {
-        var score1 = document.getElementById('numBox1').innerHTML;
-        var score2 = document.getElementById('numBox2').innerHTML;
+        var score1 = parseInt(document.getElementById('numBox1').innerHTML);
+        var score2 = parseInt(document.getElementById('numBox2').innerHTML);
 
-        var player1 = $('#player-1-selector').find("option:selected");
-        var player2 = $('#player-2-selector').find("option:selected");
+        var playerId1 = $('#player-1-selector').find("option:selected").data().playerId;
+        var playerId2 = $('#player-2-selector').find("option:selected").data().playerId;
 
-        console.log("data: " + score1 + " " + score2 + " " + player1.data().playerId + " " + player2.data().playerId);
+        var winner;
+        if (score1 > score2) {
+            winner = playerId1
+        } else {
+            winner = playerId2
+        }
 
-        var data = {'bob': 'foo','paul': 'dog'};
+        var data = { 'user_1': playerId1,
+                     'user_2': playerId2,
+                     'winner': winner,
+                     'user_1_score': score1,
+                     'user_2_score': score2
+                   };
+
         $.ajax({
-            url: "/record_match",
+            url: "/match",
             type: 'POST',
             contentType:'application/json',
             data: JSON.stringify(data),
@@ -72,7 +83,6 @@ $(document).ready(function() {
             mode = SINGLES;
             $(this).addClass("active");
             $("#doubles-btn").removeClass("active");
-            console.log("TEST SINGLES");
         }
     })
 });
@@ -83,7 +93,6 @@ $(document).ready(function() {
             mode = DOUBLES;
             $(this).addClass("active");
             $("#singles-btn").removeClass("active");
-            console.log("TEST DOUBLES");
         }
     })
 });

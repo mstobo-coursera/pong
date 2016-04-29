@@ -17,11 +17,11 @@
         <tr>
             <td>{{ user.rank }}</td>
             <td>{{ user.name }}</td>
-            <td>{{ user.rating }}</td>
+            <td>{{ user.elo|round|int }}</td>
             <td>{{ user.wins }}</td>
             <td>{{ user.losses }}</td>
             <td>{{ user.wins + user.losses }}</td>
-            <td>{{ (user.wins|float / (user.wins + user.losses) * 100)|round|int }}%</td>
+            <td>{{ (user.wins|float / (user.wins + user.losses) * 100)|round|int if user.wins + user.losses != 0 else 0}}%</td>
         </tr>
         {% endfor %}
     </table>

@@ -1,4 +1,4 @@
-import sqlalchmey as db
+import sqlalchemy as db
 from sqlalchemy.orm import relationship, backref
 from database import Base
 
@@ -22,11 +22,11 @@ class User(PongMixin, Base):
 class Match(PongMixin, Base):
     __tablename__ = 'matches'
     user_1_id = db.Column(
-	db.Integer, db.ForeignKey('users.id'), nullable=False)
+        db.Integer, db.ForeignKey('users.id'), nullable=False)
     user_2_id = db.Column(
-	db.Integer, db.ForeignKey('users.id'), nullable=False)
+        db.Integer, db.ForeignKey('users.id'), nullable=False)
     winner_id = db.Column(
-	db.Integer, db.ForeignKey('users.id'), nullable=False)
+        db.Integer, db.ForeignKey('users.id'), nullable=False)
     user_1_score = db.Column(db.Integer, nullable=False)
     user_2_score = db.Column(db.Integer, nullable=False)
 

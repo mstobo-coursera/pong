@@ -1,4 +1,7 @@
+dominate==2.2.0
 Flask==0.10.1
+Flask-Bootstrap==3.3.5.7
+flask-util-js==0.2.25
 itsdangerous==0.24
 Jinja2==2.8
 MarkupSafe==0.23
@@ -7,4 +10,5 @@ marshmallow-sqlalchemy==0.8.1
 numpy==1.11.0
 skills==0.3.0
 SQLAlchemy==1.0.12
+visitor==0.1.2
 Werkzeug==0.11.9
