@@ -4,5 +4,7 @@ Jinja2==2.8
 MarkupSafe==0.23
 marshmallow==2.7.1
 marshmallow-sqlalchemy==0.8.1
+numpy==1.11.0
+skills==0.3.0
 SQLAlchemy==1.0.12
 Werkzeug==0.11.9
